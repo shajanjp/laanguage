@@ -31,7 +31,7 @@ function laToText(laaText, wrap=['','']){
   let text = '';
   laaText.split(' ').forEach(lw => {
     lw.split('l').slice(1).forEach(lc => {
-      text += `${wrap[0]}qwertyMap[(lc.split('a').length - 2)]${wrap[1]}`;
+      text += `${wrap[0]}${qwertyMap[(lc.split('a').length - 2)]}${wrap[1]}`;
     })
     text += `${wrap[0]} ${wrap[1]}`;
   })
