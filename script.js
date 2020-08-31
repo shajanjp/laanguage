@@ -1,5 +1,11 @@
-let qwertyCharset = "qwertyuiopasdfghjklzxcvbnm";
-let qwertyMap = qwertyCharset.split("");
+const qwertyCharset = "qwertyuiopasdfghjklzxcvbnm";
+const qwertyMap = qwertyCharset.split("");
+let textInputStore = "";
+const laaToCharMap = {};
+
+qwertyMap.forEach((c, i) => {
+  laaToCharMap[`l${"a".repeat(i + 1)}`] = c;
+});
 
 function makeSameCase(rc, tc) {
   if (rc == rc.toUpperCase()) {
@@ -10,50 +16,42 @@ function makeSameCase(rc, tc) {
 }
 
 function textToLa(text, wrap = ["", ""]) {
-  let laaText = "";
-  text.split("").forEach((c) => {
-    let lc = c.toLowerCase();
-    if (lc == " ") {
-      laaText += `${wrap[0]} ${wrap[1]}`;
-    } else if (lc == "." || lc == ",") {
-      laaText += `${wrap[0]}lc${wrap[1]}`;
-    } else {
-      laaText += `${wrap[0]}l${"a".repeat(qwertyCharset.indexOf(lc) + 1)}${
+  let result = "";
+
+  text.split("").map((ch) => {
+    const lc = ch.toLowerCase();
+    if (qwertyCharset.indexOf(lc) > -1) {
+      result += `${wrap[0]}l${"a".repeat(qwertyCharset.indexOf(lc) + 1)}${
         wrap[1]
       }`;
+    } else {
+      result += `${wrap[0]}${ch}${wrap[1]}`;
     }
   });
-  return laaText;
+
+  return result;
 }
 
 function laToText(laaText, wrap = ["", ""]) {
-  let text = "";
-  laaText.split(" ").forEach((lw) => {
-    lw.split("l")
-      .slice(1)
-      .forEach((lc) => {
-        let chIndex = lc.split("a").length - 2;
-        if (chIndex >= 0) {
-          text += `${wrap[0]}${qwertyMap[chIndex]}${wrap[1]}`;
-        }
-      });
-    text += `${wrap[0]} ${wrap[1]}`;
-  });
-  return text;
+  let result = laaText.toLowerCase();
+
+  Object.keys(laaToCharMap)
+    .reverse()
+    .map((laaChar) => {
+      result = result.replaceAll(`${laaChar}`, laaToCharMap[laaChar]);
+    });
+
+  return result;
 }
 
 const contentText = document.getElementById("content-text");
 const outputText = document.getElementById("output-text");
 const laaInvert = document.getElementById("laa-invert");
 
-function makeRainbow(text) {
-  return `${text}`;
-}
-
 contentText.onkeyup = (e) => {
   if (laaInvert.checked) {
-    outputText.innerHTML = makeRainbow(laToText(contentText.value));
+    outputText.innerHTML = laToText(contentText.value);
   } else {
-    outputText.innerHTML = makeRainbow(textToLa(contentText.value));
+    outputText.innerHTML = textToLa(contentText.value);
   }
 };
