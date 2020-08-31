@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Laanguage</title>
-  <meta name="theme-color" content="#006db3" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Comic+Neue&display=swap" rel="stylesheet">
-  <style>
-    .main-container{
-      margin-top: 20px;
-    }
-    .rainbow{
-      background-image: linear-gradient(to left, violet, indigo, blue, green, orange, red);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    #output-text{
-      font-family: 'Comic Neue', cursive;
-      font-size: 2em;
-      word-wrap: break-word;
-    }
-    .highlight{
-      color: #33bb77;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="ui container main-container">
-    <h1><span class="highlight">Laa</span>nguage</h1>
-    <div class="ui form">
-      <div class="field">
-        <label>Content</label>
-        <textarea rows="8" id="content-text"></textarea>
-      </div>
-      <div class="field">
-        <input type="checkbox" id="laa-invert" value="laaInvert"> Convert from <span class="highlight">laa</span>nguage
-      </div>
-      <div class="field">
-        <label for="output-text">Converted</label>
-        <p id="output-text" class="rainbow"></p>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Laanguage</title>
+    <meta name="theme-color" content="#006db3" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Comic+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .main-container {
+        margin-top: 20px;
+      }
+      .rainbow {
+        background-image: linear-gradient(
+          to left,
+          violet,
+          indigo,
+          blue,
+          green,
+          orange,
+          red
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      #output-text {
+        font-family: "Comic Neue", cursive;
+        font-size: 2em;
+        word-wrap: break-word;
+      }
+      .highlight {
+        color: #33bb77;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ui container main-container">
+      <h1><span class="highlight">Laa</span>nguage</h1>
+      <div class="ui form">
+        <div class="field">
+          <label>Content</label>
+          <textarea rows="8" id="content-text"></textarea>
+        </div>
+        <div class="field">
+          <input type="checkbox" id="laa-invert" value="laaInvert" /> Convert
+          from <span class="highlight">laa</span>nguage
+        </div>
+        <div class="field">
+          <label for="output-text">Converted</label>
+          <p id="output-text" class="rainbow"></p>
+        </div>
       </div>
     </div>
-  </div>
-  <script src="./script.js"></script>
-  <script>
-    const contentText = document.getElementById('content-text');
-    const outputText = document.getElementById('output-text');
-    const laaInvert = document.getElementById('laa-invert');
-    function makeRainbow(text){
-      return `${text}`;
-    } 
-    contentText.onkeyup = (e) => {
-      if(laaInvert.checked){
-        outputText.innerHTML = makeRainbow(laToText(contentText.value));
-      }
-      else{
-        outputText.innerHTML = makeRainbow(textToLa(contentText.value));
-      }
-    }
-  </script>
-
-</body>
+    <script src="./script.js"></script>
+  </body>
 </html>
